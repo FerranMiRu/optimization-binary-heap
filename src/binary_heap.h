@@ -29,5 +29,6 @@ void find_position_in_heap(unsigned int position, BHQueue *bh_queue,
                            BHQueueElement **parent_of_element_in_position);
 void print_bh_element(BHQueueElement *);
 void free_heap_queue_memory(BHQueue *);
+void free_heap_queue_element(BHQueueElement *);
 
 #endif

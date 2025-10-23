@@ -222,12 +222,16 @@ void print_bh_element(BHQueueElement *element) {
 }
 
 void free_heap_queue_memory(BHQueue *bh_queue) {
-    BHQueueElement **element_to_free, *_;
+    free_heap_queue_element(bh_queue->first);
 
-    for (int i = bh_queue->size; i > 1; i--) {
-        find_position_in_heap(i, bh_queue, &element_to_free, &_);
-        free(*element_to_free);
-    }
+    bh_queue->first = NULL;
+}
 
-    free(bh_queue->first);
+void free_heap_queue_element(BHQueueElement *element_to_free) {
+    if (element_to_free == NULL) return;
+
+    free_heap_queue_element(element_to_free->left_child);
+    free_heap_queue_element(element_to_free->right_child);
+
+    free(element_to_free);
 }
